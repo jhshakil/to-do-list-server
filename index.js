@@ -16,6 +16,18 @@ async function run() {
         await client.connect();
         const listItem = client.db('listItem').collection('item');
 
+        app.get('/item', async (req, res) => {
+            const email = req.query.email;
+            const query = { email: email };
+            const items = await listItem.find(query).toArray();
+            res.send(items);
+        })
+
+        app.post('/item', async (req, res) => {
+            const newItem = req.body;
+            const item = await listItem.insertOne(newItem);
+            res.send(item);
+        })
     }
     finally {
 
