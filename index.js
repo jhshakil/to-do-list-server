@@ -13,7 +13,8 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 async function run() {
     try {
-        await client.connect();
+        client.connect();
+        // await client.connect();
         const listItem = client.db('listItem').collection('item');
 
         app.get('/item', async (req, res) => {
